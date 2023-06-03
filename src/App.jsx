@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/footer/Footer";
+import Header from "./components/header/Header";
 import PageNotFound from "./pages/404/pageNotFound";
 import Details from "./pages/details/Details";
 import Explore from "./pages/explore/Explore";
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:mediaType/:id" element={<Details />} />
