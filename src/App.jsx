@@ -17,13 +17,14 @@ function App() {
   const dispatch = useDispatch();
   const { url } = useSelector((state) => state.home);
   console.log(url);
+  console.log(url.poster);
   useEffect(() => {
     fetchApiConfig();
   }, []);
   const fetchApiConfig = () => {
     fetchDataFromApi("/configuration").then((res) => {
       console.log(res);
-
+      // xử lí url
       const url = {
         backdrop: res.images.secure_base_url + "original",
         poster: res.images.secure_base_url + "original",

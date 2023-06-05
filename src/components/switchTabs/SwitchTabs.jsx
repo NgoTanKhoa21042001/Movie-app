@@ -12,6 +12,7 @@ const SwitchTabs = ({ onTabChange, data }) => {
   const activeTab = (tab, index) => {
     // độ dài di chuyển
     setLeft(index * 100);
+    console.log(index);
 
     setTimeout(() => {
       setSelectedTab(index);
