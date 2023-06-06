@@ -19,21 +19,21 @@ import Genres from "../genres/Genres";
 
 const Carousel = ({ data, loading }) => {
   const carouselContainer = useRef();
-  console.log(carouselContainer);
+  // console.log(carouselContainer);
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
 
   // carousel
   const navigation = (dir) => {
     const container = carouselContainer.current;
-    console.log(container);
+    // console.log(container);
 
     const scrollAmount =
       dir === "left"
         ? container.scrollLeft - (container.offsetWidth + 20)
         : container.scrollLeft + (container.offsetWidth + 20);
 
-    console.log(scrollAmount);
+    // console.log(scrollAmount);
 
     container.scrollTo({
       left: scrollAmount,
@@ -64,7 +64,6 @@ const Carousel = ({ data, loading }) => {
           onClick={() => navigation("right")}
         />
         <div>
-          <h2> Multiple items </h2>
           {!loading ? (
             <div className="carouselItems" ref={carouselContainer}>
               {data?.map((item) => {

@@ -16,21 +16,21 @@ import { fetchDataFromApi } from "./utils/api";
 function App() {
   const dispatch = useDispatch();
   const { url } = useSelector((state) => state.home);
-  console.log(url);
+  // console.log(url);
   useEffect(() => {
     fetchApiConfig();
     genresCall();
   }, []);
   const fetchApiConfig = () => {
     fetchDataFromApi("/configuration").then((res) => {
-      console.log(res);
+      // console.log(res);
       // xử lí url
       const url = {
         backdrop: res.images.secure_base_url + "original",
         poster: res.images.secure_base_url + "original",
         profile: res.images.secure_base_url + "original",
       };
-      console.log(url, "url của config");
+      // console.log(url, "url của config");
       dispatch(getApiConfiguration(url));
     });
   };
@@ -43,16 +43,16 @@ function App() {
     endPoints.forEach((url) => {
       promises.push(fetchDataFromApi(`/genre/${url}/list`));
     });
-    console.log(promises, "promises");
-    console.log(url);
+    // console.log(promises, "promises");
+    // console.log(url);
     // Promise.all được sử dụng để chờ tất cả các promise trong mảng promises trả về kết quả.
     const data = await Promise.all(promises);
-    console.log(data, "data");
+    // console.log(data, "data");
 
     data.map(({ genres }) => {
       return genres.map((item) => (allGenres[item.id] = item));
     });
-    console.log(allGenres, "genres");
+    // console.log(allGenres, "genres");
     dispatch(getGenres(allGenres));
   };
 
