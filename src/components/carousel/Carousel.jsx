@@ -7,7 +7,6 @@ import {
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
 import dayjs from "dayjs";
-import Slider from "react-slick";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,18 +18,28 @@ import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
 const Carousel = ({ data, loading }) => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-  };
   const carouselContainer = useRef();
+  console.log(carouselContainer);
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
 
-  const navigation = (dir) => {};
+  // carousel
+  const navigation = (dir) => {
+    const container = carouselContainer.current;
+    console.log(container);
+
+    const scrollAmount =
+      dir === "left"
+        ? container.scrollLeft - (container.offsetWidth + 20)
+        : container.scrollLeft + (container.offsetWidth + 20);
+
+    console.log(scrollAmount);
+
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  };
 
   const skItem = () => {
     return (
@@ -57,7 +66,7 @@ const Carousel = ({ data, loading }) => {
         <div>
           <h2> Multiple items </h2>
           {!loading ? (
-            <div className="carouselItems">
+            <div className="carouselItems" ref={carouselContainer}>
               {data?.map((item) => {
                 const posterUrl = item.poster_path
                   ? url.poster + item.poster_path

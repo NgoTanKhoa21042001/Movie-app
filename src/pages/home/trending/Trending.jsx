@@ -10,6 +10,7 @@ import "./trending.scss";
 const Trending = () => {
   const [endpoint, setEndpoint] = useState("day");
   const { data, loading } = useFetch(`/trending/all/${endpoint}`);
+  console.log(data, "trending");
   const onTabChange = (tab) => {
     setEndpoint(tab === "Day" ? "day" : "week");
   };

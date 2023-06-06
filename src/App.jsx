@@ -30,7 +30,7 @@ function App() {
         poster: res.images.secure_base_url + "original",
         profile: res.images.secure_base_url + "original",
       };
-
+      console.log(url, "url của config");
       dispatch(getApiConfiguration(url));
     });
   };
@@ -44,6 +44,7 @@ function App() {
       promises.push(fetchDataFromApi(`/genre/${url}/list`));
     });
     console.log(promises, "promises");
+    console.log(url);
     // Promise.all được sử dụng để chờ tất cả các promise trong mảng promises trả về kết quả.
     const data = await Promise.all(promises);
     console.log(data, "data");
