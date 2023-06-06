@@ -15,6 +15,7 @@ import PosterFallback from "../../assets/no-poster.png";
 import Img from "../lazyLoadImage/Img";
 import "./carousel.scss";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
+import CircleRating from "../circleRating/CircleRating";
 
 const Carousel = ({ data, loading }) => {
   const settings = {
@@ -64,6 +65,8 @@ const Carousel = ({ data, loading }) => {
                   <div key={item.id} className="carouselItem">
                     <div className="posterBlock">
                       <Img src={posterUrl} />
+                      {/* toFixed() để làm tròn giá trị đó đến số nguyên gần nhất */}
+                      <CircleRating rating={item.vote_average.toFixed()} />
                     </div>
                     <div className="textBlock">
                       <span className="title">{item.title || item.name}</span>
