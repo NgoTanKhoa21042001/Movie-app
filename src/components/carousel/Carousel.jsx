@@ -16,6 +16,7 @@ import Img from "../lazyLoadImage/Img";
 import "./carousel.scss";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import CircleRating from "../circleRating/CircleRating";
+import Genres from "../genres/Genres";
 
 const Carousel = ({ data, loading }) => {
   const settings = {
@@ -67,6 +68,7 @@ const Carousel = ({ data, loading }) => {
                       <Img src={posterUrl} />
                       {/* toFixed() để làm tròn giá trị đó đến số nguyên gần nhất */}
                       <CircleRating rating={item.vote_average.toFixed()} />
+                      <Genres data={item.genre_ids.slice(0, 2)} />
                     </div>
                     <div className="textBlock">
                       <span className="title">{item.title || item.name}</span>

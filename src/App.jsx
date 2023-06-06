@@ -10,16 +10,16 @@ import Details from "./pages/details/Details";
 import Explore from "./pages/explore/Explore";
 import Home from "./pages/home/Home";
 import SearchResult from "./pages/searchResults/SearchResult";
-import { getApiConfiguration } from "./store/homeSlice";
+import { getApiConfiguration, getGenres } from "./store/homeSlice";
 import { fetchDataFromApi } from "./utils/api";
 
 function App() {
   const dispatch = useDispatch();
   const { url } = useSelector((state) => state.home);
   console.log(url);
-  console.log(url.poster);
   useEffect(() => {
     fetchApiConfig();
+    genresCall();
   }, []);
   const fetchApiConfig = () => {
     fetchDataFromApi("/configuration").then((res) => {
@@ -33,6 +33,26 @@ function App() {
 
       dispatch(getApiConfiguration(url));
     });
+  };
+  const genresCall = async () => {
+    // để lưu trữ các promise được trả về từ việc gọi fetchDataFromApi
+    let promises = [];
+    let endPoints = ["tv", "movie"];
+    let allGenres = {};
+
+    endPoints.forEach((url) => {
+      promises.push(fetchDataFromApi(`/genre/${url}/list`));
+    });
+    console.log(promises, "promises");
+    // Promise.all được sử dụng để chờ tất cả các promise trong mảng promises trả về kết quả.
+    const data = await Promise.all(promises);
+    console.log(data, "data");
+
+    data.map(({ genres }) => {
+      return genres.map((item) => (allGenres[item.id] = item));
+    });
+    console.log(allGenres, "genres");
+    dispatch(getGenres(allGenres));
   };
 
   return (
