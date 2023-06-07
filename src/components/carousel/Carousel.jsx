@@ -17,7 +17,7 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endpoint }) => {
   const carouselContainer = useRef();
   // console.log(carouselContainer);
   const { url } = useSelector((state) => state.home);
@@ -36,6 +36,7 @@ const Carousel = ({ data, loading }) => {
     // console.log(scrollAmount);
 
     container.scrollTo({
+      // số lượng pixel cần di chuyển
       left: scrollAmount,
       behavior: "smooth",
     });
@@ -71,7 +72,13 @@ const Carousel = ({ data, loading }) => {
                   ? url.poster + item.poster_path
                   : PosterFallback;
                 return (
-                  <div key={item.id} className="carouselItem">
+                  <div
+                    key={item.id}
+                    className="carouselItem"
+                    onClick={() =>
+                      navigate(`/${item.media_type || endpoint}/${item.id}`)
+                    }
+                  >
                     <div className="posterBlock">
                       <Img src={posterUrl} />
                       {/* toFixed() để làm tròn giá trị đó đến số nguyên gần nhất */}

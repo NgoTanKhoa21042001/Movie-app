@@ -30,7 +30,9 @@ const Header = () => {
     setMobileMenu(true);
     setShowSearch(false);
   };
-
+  const navigateToHome = () => {
+    navigate("/");
+  };
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
       navigate(`/search/${query}`);
@@ -74,7 +76,7 @@ const Header = () => {
     <div className={`header  ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
         <div className="logo">
-          <img src={logo} alt="" />
+          <img src={logo} alt="" onClick={navigateToHome} />
         </div>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>

@@ -52,7 +52,8 @@ function App() {
     data.map(({ genres }) => {
       return genres.map((item) => (allGenres[item.id] = item));
     });
-    // console.log(allGenres, "genres");
+    // console.log(allGenres, "genres")
+    // hàm dispatch được gọi để gửi các thể loại đã lấy được đến một action ;
     dispatch(getGenres(allGenres));
   };
 
