@@ -14,7 +14,7 @@ const useFetch = (url) => {
     setLoading("loading...");
     setData(null);
     setError(null);
-
+    // lấy dữ liệu từ một API
     fetchDataFromApi(url)
       .then((res) => {
         setLoading(false);
@@ -25,7 +25,7 @@ const useFetch = (url) => {
         setError("SOmething went wrong");
       });
   }, [url]);
-
+  //  hiển thị dữ liệu, biểu tượng tải, hoặc thông báo lỗi
   return { data, loading, error };
 };
 
