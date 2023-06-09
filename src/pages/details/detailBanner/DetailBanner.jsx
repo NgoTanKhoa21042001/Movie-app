@@ -4,6 +4,7 @@
 /* eslint-disable no-unused-vars */
 import dayjs from "dayjs";
 import React from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import PosterFallback from "../../../assets/no-poster.png";
@@ -11,10 +12,13 @@ import CircleRating from "../../../components/circleRating/CircleRating";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import Genres from "../../../components/genres/Genres";
 import Img from "../../../components/lazyLoadImage/Img";
+import VideoPopup from "../../../components/videopopup/VideoPopup";
 import useFetch from "../../../hooks/useFetch";
 import "./detailbanner.scss";
-import { PlayIcon } from "./PlayBtn";
+import { PlayIcon } from "../Playbtn";
 const DetailBanner = ({ video, crew }) => {
+  const [show, setShow] = useState(false);
+  const [videoId, setVideoId] = useState(null);
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
   console.log(data, "data");
@@ -64,7 +68,13 @@ const DetailBanner = ({ video, crew }) => {
                     <Genres data={_genres} />
                     <div className="row">
                       <CircleRating rating={data?.vote_average.toFixed()} />
-                      <div className="playbtn">
+                      <div
+                        className="playbtn"
+                        onClick={() => {
+                          setShow(true);
+                          setVideoId(video.key);
+                        }}
+                      >
                         <PlayIcon />
                         <span>
                           <div className="text">Watch Trailer</div>
@@ -126,6 +136,12 @@ const DetailBanner = ({ video, crew }) => {
                     )}
                   </div>
                 </div>
+                <VideoPopup
+                  show={show}
+                  setShow={setShow}
+                  videoId={videoId}
+                  setVideoId={setVideoId}
+                />
               </ContentWrapper>
             </React.Fragment>
           )}
