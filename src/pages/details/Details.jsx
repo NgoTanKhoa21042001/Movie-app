@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import Recommendations from "./carousel/Recommendation";
+import Similar from "./carousel/Similar";
 import Cast from "./cast/Cast";
 import "./detail.scss";
 import DetailBanner from "./detailBanner/DetailBanner";
@@ -22,6 +24,8 @@ const Details = () => {
       <DetailBanner video={data?.results?.[0]} crew={credits?.crew} />
       <Cast data={credits?.cast} loading={creditsLoading} />
       <VideoSection data={data} loading={loading} />
+      <Similar mediaType={mediaType} id={id} />
+      <Recommendations mediaType={mediaType} id={id} />
     </div>
   );
 };
