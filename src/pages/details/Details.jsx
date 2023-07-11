@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { Suspense } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -9,7 +9,8 @@ import Recommendations from "./carousel/Recommendation";
 import Similar from "./carousel/Similar";
 import Cast from "./cast/Cast";
 import "./detail.scss";
-import DetailBanner from "./detailBanner/DetailBanner";
+// import DetailBanner from "./detailBanner/DetailBanner";
+const DetailBanner = React.lazy(() => import("./detailBanner/DetailBanner"));
 import VideoSection from "./videoSection/VideoSection";
 const Details = () => {
   const { mediaType, id } = useParams();
@@ -21,7 +22,9 @@ const Details = () => {
 
   return (
     <div>
-      <DetailBanner video={data?.results?.[0]} crew={credits?.crew} />
+      <Suspense>
+        <DetailBanner video={data?.results?.[0]} crew={credits?.crew} />
+      </Suspense>
       <Cast data={credits?.cast} loading={creditsLoading} />
       <VideoSection data={data} loading={loading} />
       <Similar mediaType={mediaType} id={id} />
