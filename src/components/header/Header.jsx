@@ -45,7 +45,7 @@ const Header = () => {
   // scroll
   const controlNavbar = () => {
     if (window.scrollY > 200) {
-      if (window.scrollY > lastScrollY && !mobileMenu) {
+      if (window.scrollY > lastScrollY) {
         setShow("hide");
       } else {
         setShow("show");
@@ -78,6 +78,7 @@ const Header = () => {
         <div className="logo">
           <img src={logo} alt="" onClick={navigateToHome} />
         </div>
+        {/* phaanff bên trong menu bar */}
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies

@@ -8,7 +8,7 @@ import "./switchtabs.scss";
 const SwitchTabs = ({ onTabChange, data }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [left, setLeft] = useState(0);
-
+  console.log(data, "tab");
   const activeTab = (tab, index) => {
     // độ dài di chuyển
     setLeft(index * 100);

@@ -7,6 +7,7 @@ import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import Img from "../../../components/lazyLoadImage/Img";
 import avatar from "../../../assets/avatar.png";
 import "./cast.scss";
+import { Helmet } from "react-helmet";
 const Cast = ({ data, loading }) => {
   const { url } = useSelector((state) => state.home);
   const skeleton = () => {
@@ -20,6 +21,9 @@ const Cast = ({ data, loading }) => {
   };
   return (
     <div className="castSection">
+      <Helmet>
+        <title>Movie Detail Page</title>
+      </Helmet>
       <ContentWrapper>
         <div className="sectionHeading">Top Cast</div>
         {!loading ? (

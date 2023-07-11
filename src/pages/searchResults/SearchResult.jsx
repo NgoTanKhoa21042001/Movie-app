@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
 import ContentWrapper from "../../components/contentWrapper/ContentWrapper";
@@ -52,6 +53,9 @@ const SearchResult = () => {
 
   return (
     <div className="searchResultsPage">
+      <Helmet>
+        <title>Search Results page</title>
+      </Helmet>
       {loading && <Spinner initial={true} />}
       {!loading && (
         <ContentWrapper>

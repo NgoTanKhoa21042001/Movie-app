@@ -11,6 +11,7 @@ import { fetchDataFromApi } from "../../utils/api";
 import ContentWrapper from "../../components/contentWrapper/ContentWrapper";
 import MovieCard from "../../components/movieCard/MovieCard";
 import Spinner from "../../components/spinner/Spinner";
+import { Helmet } from "react-helmet";
 
 let filters = {};
 
@@ -98,6 +99,9 @@ const Explore = () => {
 
   return (
     <div className="explorePage">
+      <Helmet>
+        <title>Movie and TV Shows page</title>
+      </Helmet>
       <ContentWrapper>
         <div className="pageHeader">
           <div className="pageTitle">
